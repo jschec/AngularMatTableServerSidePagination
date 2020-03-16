@@ -1,0 +1,39 @@
+<h2 mat-dialog-title>Patient</h2>
+<form [formGroup]="form" (ngSubmit)="save()">
+  <mat-dialog-content>
+    <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="24px">
+      <mat-form-field fxFlex>
+        <mat-placeholder>First Name</mat-placeholder>
+        <input type="text" formControlName="firstName" matInput required>
+        <mat-error *ngIf="!form.controls['firstName'].valid && form.controls['firstName'].touched">
+          Required field must be 50 characters or less
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field fxFlex>
+        <mat-placeholder>Last Name</mat-placeholder>
+        <input type="text" formControlName="lastName" matInput required>
+        <mat-error *ngIf="!form.controls['lastName'].valid && form.controls['lastName'].touched">
+          Required field must be 50 characters or less
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="24px">
+      <mat-form-field fxFlex>
+        <mat-placeholder>Date of Birth</mat-placeholder>
+        <input matInput [matDatepicker]="datepickerRef" formControlName="dateOfBirth" required>
+        <mat-datepicker-toggle matSuffix [for]="datepickerRef"></mat-datepicker-toggle>
+        <mat-datepicker #datepickerRef></mat-datepicker>
+        <mat-error *ngIf="!form.controls['dateOfBirth'].valid && form.controls['dateOfBirth'].touched">
+          Required field
+        </mat-error>
+    </mat-form-field>
+    </div>
+
+  </mat-dialog-content>
+  <mat-dialog-actions fxLayout="row" fxLayoutAlign="end center">
+    <button *ngIf="isCreateMode()" mat-button [disabled]="!form.valid">CREATE RECORD</button>
+    <button *ngIf="isUpdateMode()" mat-button [disabled]="!form.valid">UPDATE RECORD</button>
+  </mat-dialog-actions>
+</form>

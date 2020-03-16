@@ -1,0 +1,29 @@
+<div class="mat-table-wrapper">
+
+  <!-- Custom header for mat-table -->
+  <div class="table-wrapper-header" fxLayout="row" fxLayoutAlign="start baseline">
+    <div class="table-wrapper-name">{{ name }}</div>
+    
+    <div class="table-wrapper-spacer" fxFlex></div>
+
+    <!-- Button to activate column filter menu -->
+    <button class="column-filter" type="button" mat-icon-button [matMenuTriggerFor]="columnFilter" dir="rtl">
+      <mat-icon>filter_list</mat-icon>
+    </button>
+
+    <ng-content select=".actions"></ng-content>
+  </div>
+  
+  <!-- Column filter menu -->
+  <mat-menu #columnFilter="matMenu" yPosition="below" xPosition="before">
+    <button class="checkbox-item mat-menu-item" *ngFor="let column of columns"
+            (click)="toggleColumnVisibility(column, $event)">
+      <mat-checkbox [(ngModel)]="column.visible" class="checkbox" #checkbox (click)="$event.stopPropagation()">
+        {{ column.name }}
+      </mat-checkbox>
+    </button>
+  </mat-menu>
+
+  <!-- Mat table placeholder -->
+  <ng-content></ng-content>
+</div>

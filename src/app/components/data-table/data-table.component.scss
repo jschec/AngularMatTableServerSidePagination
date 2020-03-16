@@ -1,0 +1,10 @@
+@import "../../../styles/var";
+
+.no-records {
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  border-bottom: 1px solid rgba(0,0,0,.12);
+}
